@@ -3,9 +3,9 @@
            https://api.github.com/users/<your name>
 */
 axios.get('https://api.github.com/users/karenjli')
-.then ((response) => {
-  console.log(response)
-})
+// .then ((response) => {
+//   console.log(response)
+// })
 
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
@@ -49,6 +49,64 @@ const followersArray = [];
 </div>
 
 */
+
+function Card (user) {
+  //card
+  let userCard = document.createElement('div');
+  userCard.classList.add('card');
+
+  //img
+  let userImg = document.createElement('img');
+  userImg.src = user.avatar.url;
+
+  //card-info
+  let userInfo = document.createElement('div');
+  userInfo.classList.add('card-info');
+
+  //name
+  let userName = document.createElement('h3');
+  userName.classList.add('name');
+  
+  //username
+  let userHandle = document.createElement('p');
+  userHandle.classList.add('username');
+  userHandle.textContent = user.login;
+
+  //location
+  let userLocation = document.createElement('p')
+  userLocation.textContent = user.location;
+
+  //Profile Link
+  let userProfile = document.createElement('p')
+  let profileLink = document.createElement('a');
+  profileLink.textContent = user.html_url;
+
+  //Followers
+  let userFollowers = document.createElement('p')
+  userFollowers.textContent = user.followers;
+
+  //Following
+  let userFollowing = document.createElement('p')
+  userFollowing.textContent = user.following;
+
+  //Bio
+  let userBio = document.createElement('p');
+  userBio.textContent = user.bio;
+
+  //AppendChild
+  userCard.appendChild ('userImg');
+  userCard.appendChild('userInfo');
+  userInfo.appendChild('userName');
+  userInfo.appendChild('userHandle');
+  userInfo.appendChild('userLocation');
+  userInfo.appendChild('userProfile');
+  userInfo.appendChild('userFollowers');
+  userInfo.appendChild('userFollowing');
+  userInfo.appendChild('userBio');
+  userProfile.appendChild('profileLink');
+
+
+}
 
 /* List of LS Instructors Github username's: 
   tetondan
