@@ -2,6 +2,123 @@
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
 */
+const karen = axios.get('https://api.github.com/users/karenjli')
+.then ((response) => {
+  //console.log(response);
+  let cardBox = document.querySelector ('.cards');
+  let newCard = new Card(response.data)
+   cardBox.appendChild(newCard)
+  })
+  .catch((err) => {
+    console.log(err);
+});
+
+function Card (user) {
+  //card
+  let userCard = document.createElement('div');
+  userCard.classList.add('card');
+
+  //img
+  let userImg = document.createElement('img');
+  userImg.src = user.avatar_url;
+
+  //card-info
+  let userInfo = document.createElement('div');
+  userInfo.classList.add('card-info');
+
+  //name
+  let userName = document.createElement('h3');
+  userName.classList.add('name');
+  userName.textContent = user.name;
+  
+  //username
+  let userHandle = document.createElement('p');
+  userHandle.classList.add('username');
+  userHandle.textContent = user.login;
+
+  //location
+  let userLocation = document.createElement('p')
+  userLocation.textContent = `Location: ${user.location}`;
+
+  //Profile Link
+  let userProfile = document.createElement('p')
+  let profileLink = document.createElement('a');
+  profileLink.href = user.html_url;
+  profileLink.textContent = user.html_url;
+  userProfile.textContent = `Profile: `;
+  
+  //Followers
+  let userFollowers = document.createElement('p')
+  userFollowers.textContent = `Follwers: ${user.followers}`;
+
+  //Following
+  let userFollowing = document.createElement('p')
+  userFollowing.textContent = `Following: ${user.following}`;
+
+  //Bio
+  let userBio = document.createElement('p');
+  userBio.textContent = `Bio: ${user.bio}`;
+
+  //AppendChild
+  userCard.appendChild (userImg);
+  userCard.appendChild(userInfo);
+  userInfo.appendChild(userName);
+  userInfo.appendChild(userHandle);
+  userInfo.appendChild(userLocation);
+  userInfo.appendChild(userProfile);
+  userInfo.appendChild(userFollowers);
+  userInfo.appendChild(userFollowing);
+  userInfo.appendChild(userBio);
+  userProfile.appendChild(profileLink);
+
+  //add to cards
+  
+  //cardBox.appendChild(userCard);
+
+  return userCard;
+}
+
+
+function call (name)  {
+  let gituser = axios.get (`https://api.github.com/users/${name}`)
+  .then ((response) => {
+      //console.log(response);
+      let cardBox = document.querySelector ('.cards');
+      let newCard = new Card(response.data)
+      cardBox.appendChild(newCard)
+    })
+  .catch((err) => {
+      console.log(err);
+    });
+}
+
+const followersArray = [
+  "tetondan",
+  "dustinmyers",
+  "justsml",
+  "luishrd",
+  "bigknell"
+];
+
+followersArray.forEach (item => {
+  call(item);
+})
+
+//Stretch Goal
+
+const karenprofile = axios.get('https://api.github.com/users/karenjli/followers')
+  .then ((response) => {
+      let karenfollowers = response.data.map(item => item.login);
+    
+      //console.log(karenfollowers);
+      karenfollowers.forEach(item=> {
+        call(item)});
+      })
+   // });
+
+
+
+ 
 
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
@@ -24,7 +141,7 @@
           user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
@@ -46,10 +163,14 @@ const followersArray = [];
 
 */
 
-/* List of LS Instructors Github username's: 
-  tetondan
-  dustinmyers
-  justsml
-  luishrd
-  bigknell
-*/
+//Object Component
+
+// Card(karen);
+// Card(dan);
+// Card(dustin);
+// Card(justsml);
+// Card(luishrd);
+// Card(bigknell);
+
+
+
